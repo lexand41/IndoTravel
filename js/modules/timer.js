@@ -31,51 +31,54 @@ const incline = (timerDate, dateContent, nominative, genetive, genPlural) => {
 };
 
 export const timer = (deadline) => {
-  const timerCountDays = document.querySelector('.timer__count_days');
-  const timerUnitsDays = document.querySelector('.timer__units_days');
+  const timerDeadlines = document.querySelectorAll('[data-timer-deadline]');
+  timerDeadlines.forEach(timerDeadline => {
+    const e = timerDeadline;
 
-  const timerCountHours = document.querySelector('.timer__count_hours');
-  const timerUnitsHours = document.querySelector('.timer__units_hours');
+    const timerCountDays = e.querySelector('.timer__count_days');
+    const timerUnitsDays = e.querySelector('.timer__units_days');
 
-  const timerCountMinutes = document.querySelector('.timer__count_minutes');
-  const timerUnitsMinutes = document.querySelector('.timer__units_minutes');
+    const timerCountHours = e.querySelector('.timer__count_hours');
+    const timerUnitsHours = e.querySelector('.timer__units_hours');
 
-  const heroText = document.querySelector('.hero__text');
-  const heroTimer = document.querySelector('.hero__timer');
+    const timerCountMinutes = e.querySelector('.timer__count_minutes');
+    const timerUnitsMinutes = e.querySelector('.timer__units_minutes');
 
-  const start = () => {
-    const timer = getTimeReamaining(deadline);
-    console.log(timer.days);
-    if (timer.days === 0) {
-      timerCountDays.textContent =
-        timer.hours < 10 ? '0' + timer.hours : timer.hours;
-      incline(timer.hours, timerUnitsDays, 'час', 'часа', 'часов');
-      timerCountHours.textContent =
-        timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
-      incline(timer.minutes, timerUnitsHours, 'минута', 'минуты', 'минут');
-      timerCountMinutes.textContent =
-        timer.seconds < 10 ? '0' + timer.seconds : timer.seconds;
-      incline(timer.seconds, timerUnitsMinutes, 'секунда', 'секунды', 'секунд');
-    } else {
-      timerCountDays.textContent = timer.days;
-      incline(timer.days, timerUnitsDays, 'день', 'дня', 'дней');
-      timerCountHours.textContent =
-        timer.hours < 10 ? '0' + timer.hours : timer.hours;
-      incline(timer.hours, timerUnitsHours, 'час', 'часа', 'часов');
-      timerCountMinutes.textContent =
-        timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
-      incline(timer.minutes, timerUnitsMinutes, 'минута', 'минуты', 'минут');
-    }
-    const intervalId = setTimeout(start, 1000);
 
-    if (timer.timeRemaining <= 0) {
-      clearTimeout(intervalId);
-      heroText.remove();
-      heroTimer.remove();
-      timerCountDays.textContent = '0';
-      timerCountHours.textContent = '00';
-      timerCountMinutes.textContent = '00';
-    }
-  };
-  start();
+    const start = () => {
+      const timer = getTimeReamaining(deadline);
+      if (timer.days === 0) {
+        timerCountDays.textContent =
+          timer.hours < 10 ? '0' + timer.hours : timer.hours;
+        incline(timer.hours, timerUnitsDays, 'час', 'часа', 'часов');
+        timerCountHours.textContent =
+          timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
+        incline(timer.minutes, timerUnitsHours, 'минута', 'минуты', 'минут');
+        timerCountMinutes.textContent =
+          timer.seconds < 10 ? '0' + timer.seconds : timer.seconds;
+        incline(timer.seconds, timerUnitsMinutes, 'секунда', 'секунды', 'секунд');
+      } else {
+        timerCountDays.textContent = timer.days;
+        incline(timer.days, timerUnitsDays, 'день', 'дня', 'дней');
+        timerCountHours.textContent =
+          timer.hours < 10 ? '0' + timer.hours : timer.hours;
+        incline(timer.hours, timerUnitsHours, 'час', 'часа', 'часов');
+        timerCountMinutes.textContent =
+          timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
+        incline(timer.minutes, timerUnitsMinutes, 'минута', 'минуты', 'минут');
+      }
+      const intervalId = setTimeout(start, 1000);
+
+      if (timer.timeRemaining <= 0) {
+        clearTimeout(intervalId);
+        const heroText = document.querySelector('.hero__text');
+        const heroTimers = document.querySelectorAll('.timer');
+        heroTimers.forEach(heroTimer => {
+          heroTimer.remove();
+        });
+        heroText.remove();
+      }
+    };
+    start();
+  });
 };
