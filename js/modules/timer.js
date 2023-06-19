@@ -3,11 +3,12 @@ const getTimeReamaining = (deadline) => {
   const dateNow = Date.now();
   const timeRemaining = dateStop - dateNow;
 
+  const seconds = Math.floor(timeRemaining / 1000 % 60);
   const minutes = Math.floor(timeRemaining / 1000 / 60 % 60);
   const hours = Math.floor(timeRemaining / 1000 / 60 / 60 % 24);
   const days = Math.floor(timeRemaining / 1000 / 60 / 60 / 24);
 
-  return {timeRemaining, minutes, hours, days};
+  return {timeRemaining, seconds, minutes, hours, days};
 };
 
 const incline = (timerDate, dateContent, nominative, genetive, genPlural) => {
@@ -44,18 +45,27 @@ export const timer = (deadline) => {
 
   const start = () => {
     const timer = getTimeReamaining(deadline);
-
-    timerCountDays.textContent = timer.days;
-    incline(timer.days, timerUnitsDays, 'день', 'дня', 'дней');
-
-    timerCountHours.textContent =
-      timer.hours < 10 ? '0' + timer.hours : timer.hours;
-    incline(timer.hours, timerUnitsHours, 'час', 'часа', 'часов');
-
-    timerCountMinutes.textContent =
-      timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
-    incline(timer.minutes, timerUnitsMinutes, 'минута', 'минуты', 'минут');
-
+    console.log(timer.days);
+    if (timer.days === 0) {
+      timerCountDays.textContent =
+        timer.hours < 10 ? '0' + timer.hours : timer.hours;
+      incline(timer.hours, timerUnitsDays, 'час', 'часа', 'часов');
+      timerCountHours.textContent =
+        timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
+      incline(timer.minutes, timerUnitsHours, 'минута', 'минуты', 'минут');
+      timerCountMinutes.textContent =
+        timer.seconds < 10 ? '0' + timer.seconds : timer.seconds;
+      incline(timer.seconds, timerUnitsMinutes, 'секунда', 'секунды', 'секунд');
+    } else {
+      timerCountDays.textContent = timer.days;
+      incline(timer.days, timerUnitsDays, 'день', 'дня', 'дней');
+      timerCountHours.textContent =
+        timer.hours < 10 ? '0' + timer.hours : timer.hours;
+      incline(timer.hours, timerUnitsHours, 'час', 'часа', 'часов');
+      timerCountMinutes.textContent =
+        timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
+      incline(timer.minutes, timerUnitsMinutes, 'минута', 'минуты', 'минут');
+    }
     const intervalId = setTimeout(start, 1000);
 
     if (timer.timeRemaining <= 0) {
