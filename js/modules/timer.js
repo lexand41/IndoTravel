@@ -44,7 +44,6 @@ export const timer = (deadline) => {
     const timerCountMinutes = e.querySelector('.timer__count_minutes');
     const timerUnitsMinutes = e.querySelector('.timer__units_minutes');
 
-
     const start = () => {
       const timer = getTimeReamaining(deadline);
       if (timer.days === 0) {
