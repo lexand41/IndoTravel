@@ -1,5 +1,6 @@
 import './modules/burger.js';
 import './modules/acc.js';
+import './modules/airplane.js';
 import {timer} from './modules/timer.js';
 import {pluginTimer} from './modules/createElemTimer.js';
 
