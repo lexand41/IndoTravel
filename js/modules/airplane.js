@@ -28,23 +28,23 @@ const calcPositionAirplane = () => {
 
   airplane.style.bottom = (scrolled + 'px');
 
-  // if (window.pageYOffset === maxScroll) {
-  //   airplane.style.transform = `rotate(180deg)`;
-  // }
-  // if (window.pageYOffset === 0) {
-  //   airplane.style.transform = `none`;
-  // }
+  if (window.pageYOffset === maxScroll) {
+    airplane.style.transform = `rotate(180deg)`;
+  }
+  if (window.pageYOffset === 0) {
+    airplane.style.transform = `none`;
+  }
 };
 
 window.addEventListener('scroll', () => {
   requestAnimationFrame(calcPositionAirplane);
 
-  // if (window.pageYOffset > scrollTop) {
-  //   airplane.style.transform = `none`;
-  // } else {
-  //   airplane.style.transform = `rotate(180deg)`;
-  // }
-  // scrollTop = window.pageYOffset;
+  if (window.pageYOffset > scrollTop) {
+    airplane.style.transform = `none`;
+  } else {
+    airplane.style.transform = `rotate(180deg)`;
+  }
+  scrollTop = window.pageYOffset;
 });
 
 calcPositionAirplane();
