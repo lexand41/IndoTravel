@@ -5,7 +5,7 @@ document.body.prepend(overlay);
 
 document.addEventListener('click', ({target}) => {
   if (target.closest('.header__menu-button')) {
-    headerMenu.classList.toggle('header__menu_active');
+    headerMenu.classList.add('header__menu_active');
     overlay.classList.toggle('overlay__activ');
   } else if (target.closest('.header__link')) {
     headerMenu.classList.remove('header__menu_active');
