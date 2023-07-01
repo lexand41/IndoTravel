@@ -80,9 +80,7 @@ const {
   modalBook,
 } = createModalBook();
 
-resForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
+const createRequestBook = () => {
   fetchRequest('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',
     body: {
@@ -125,11 +123,9 @@ resForm.addEventListener('submit', (e) => {
       'Content-Type': 'application/json',
     },
   });
-});
+};
 
-footerForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
+const createRequestFooter = () => {
   fetchRequest('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',
     body: {
@@ -149,4 +145,14 @@ footerForm.addEventListener('submit', (e) => {
       'Content-Type': 'application/json',
     },
   });
+};
+
+resForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  createRequestBook();
+});
+
+footerForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  createRequestFooter();
 });
