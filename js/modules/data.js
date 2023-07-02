@@ -86,13 +86,15 @@ const renderBooking = async () => {
             inclinePerson(bookPersons.value, 'человека', 'человек');
           const str1 = monthToString(el.date.substring(0, 5));
           const str2 = monthToString(el.date.substring(8));
+          const fullPrice = (el.price * bookPersons.value).toLocaleString();
 
           showBookData.textContent =
-            `с ${str1} - ${str2}, ${bookPersons.value} ${persons}`;
-          showBookPrice.textContent = `${el.price * bookPersons.value}₽`;
+            `${str1} - ${str2}, ${bookPersons.value} ${persons}`;
+          showBookPrice.textContent =
+            `${fullPrice}₽`;
           // eslint-disable-next-line max-len
           sessionStorage.setItem('countPersons', `${bookPersons.value} ${persons}`);
-          sessionStorage.setItem('fullPrice', el.price * bookPersons.value);
+          sessionStorage.setItem('fullPrice', fullPrice);
           sessionStorage.setItem('dates', `${str1} - ${str2}`);
         });
         const a = el['min-people'];
