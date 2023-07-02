@@ -1,9 +1,15 @@
-const showBookInfo = document.querySelector('.reservation__info');
+import showModal from './modal.js';
+import createModalBook from './createModalBook.js';
+// const showBookInfo = document.querySelector('.reservation__info');
 const resForm = document.querySelector('.reservation__form');
 const footerForm = document.querySelector('.footer__form');
 const footerFormTitle = document.querySelector('.footer__form-title');
 const footerText = document.querySelector('.footer__text');
 const footerInputWrap = document.querySelector('.footer__input-wrap');
+const {
+  modalBox,
+  modalBook,
+} = createModalBook();
 
 const fetchRequest = async (url, {
   method = 'get',
@@ -33,53 +39,6 @@ const fetchRequest = async (url, {
   }
 };
 
-const createModalBook = (text, elem) => {
-  const modalBook = document.createElement('div');
-  modalBook.classList.add('modal');
-  modalBook.setAttribute('id', 'my-modal');
-
-  const modalBox = document.createElement('div');
-  modalBox.classList.add('modal__box', 'reservation__form');
-  modalBox.innerHTML = `
-    <h1 style="margin-bottom: 10px">
-      Ваша заявка успешно отправлена</h1>
-    <p style="margin-bottom: 30px">
-      Наши менеджеры свяжутся с вами в течении 3-х рабочих дней</p>
-    <img style="margin-bottom: 10px" src="img/ok.svg">
-  `;
-  modalBook.append(modalBox);
-  document.body.append(modalBook);
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      modalBook.classList.remove('open');
-      showBookInfo.textContent = '';
-      resForm.reset();
-    }
-  });
-
-  modalBox.addEventListener('click', e => {
-    e._isClickWithInModal = true;
-  });
-
-  modalBook.addEventListener('click', e => {
-    if (e._isClickWithInModal) return;
-    e.currentTarget.classList.remove('open');
-    showBookInfo.textContent = '';
-    resForm.reset();
-  });
-
-  return {
-    modalBox,
-    modalBook,
-  };
-};
-
-const {
-  modalBox,
-  modalBook,
-} = createModalBook();
-
 const createRequestBook = () => {
   fetchRequest('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',
@@ -103,16 +62,27 @@ const createRequestBook = () => {
           class="button reservation__button">Забронировать</button>
         `;
         modalBox.style.padding = '77px 160px';
-
-        const resBtn = resForm.querySelector('.reservation__button');
+        // const resBtn = resForm.querySelector('.reservation__button');
         const modalBtn = modalBox.querySelector('button');
         modalBtn.addEventListener('click', (e) => {
-          resBtn.click();
+          createRequestBook();
         });
-        console.log(modalBtn);
       }
 
       modalBook.classList.add('open');
+
+      const btnResForm = resForm.querySelector('.reservation__button');
+      btnResForm.setAttribute('disabled', 'true');
+
+      const resSelects = document.querySelectorAll('.reservation__select');
+      resSelects.forEach(elem => {
+        elem.setAttribute('disabled', 'true');
+      });
+
+      const resInputs = document.querySelectorAll('.reservation__input');
+      resInputs.forEach(elem => {
+        elem.setAttribute('disabled', 'true');
+      });
       // resForm.innerHTML = `
       //   <h2>Заявка успешно отправлена</h2>
       //   <h3>номер заявки ${data.id}<p>
@@ -149,10 +119,17 @@ const createRequestFooter = () => {
 
 resForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  createRequestBook();
+
+  const countPersons = sessionStorage.getItem('countPersons');
+  const dates = sessionStorage.getItem('dates');
+  const fullPrice = sessionStorage.getItem('fullPrice');
+
+  showModal(countPersons, dates, fullPrice);
 });
 
 footerForm.addEventListener('submit', (e) => {
   e.preventDefault();
   createRequestFooter();
 });
+
+export default createRequestBook;

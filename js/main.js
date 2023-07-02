@@ -11,11 +11,9 @@ const dataDeadline = document.querySelector('.timer');
 dataDeadline.dataset.timerDeadline = '2023/07/19 12:48 GMT+0300';
 const deadline = dataDeadline.dataset.timerDeadline;
 
+const resForm = document.querySelector('.reservation__form');
+resForm.reset();
+
 pluginTimer();
 
 timer(deadline);
-
-
-// const result = await fetch('./date.json');
-// const data = await result.json();
-// console.log(data);

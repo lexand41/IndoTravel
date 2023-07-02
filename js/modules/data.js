@@ -82,13 +82,18 @@ const renderBooking = async () => {
     data.forEach((el) => {
       if (el.date === selectDate.value) {
         bookPersons.addEventListener('change', () => {
-          // eslint-disable-next-line max-len
-          const persons = inclinePerson(bookPersons.value, 'человека', 'человек');
+          const persons =
+            inclinePerson(bookPersons.value, 'человека', 'человек');
           const str1 = monthToString(el.date.substring(0, 5));
           const str2 = monthToString(el.date.substring(8));
-          // eslint-disable-next-line max-len
-          showBookData.textContent = `с ${str1} по ${str2}, ${bookPersons.value} ${persons}`;
+
+          showBookData.textContent =
+            `с ${str1} - ${str2}, ${bookPersons.value} ${persons}`;
           showBookPrice.textContent = `${el.price * bookPersons.value}₽`;
+          // eslint-disable-next-line max-len
+          sessionStorage.setItem('countPersons', `${bookPersons.value} ${persons}`);
+          sessionStorage.setItem('fullPrice', el.price * bookPersons.value);
+          sessionStorage.setItem('dates', `${str1} - ${str2}`);
         });
         const a = el['min-people'];
         const b = el['max-people'];
