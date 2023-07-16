@@ -3,7 +3,6 @@ import createModalBook from './createModalBook.js';
 // import './modules/masks.js';
 
 // const showBookInfo = document.querySelector('.reservation__info');
-const wrapName = document.getElementById('wrap__name');
 const resForm = document.querySelector('.reservation__form');
 const footerForm = document.querySelector('.footer__form');
 const footerFormTitle = document.querySelector('.footer__form-title');
@@ -122,9 +121,6 @@ const createRequestFooter = () => {
 
 resForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log(41);
-  // wrapName.classList.remove('input-wrap__valid');
-
 
   const countPersons = sessionStorage.getItem('countPersons');
   const dates = sessionStorage.getItem('dates');

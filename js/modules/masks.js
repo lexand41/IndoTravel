@@ -20,7 +20,6 @@ const maskPhone = event => {
   if (!reg.test(target.value) || target.value.length < 5 ||
     keyCode > 47 && keyCode < 58) {
     target.value = newValue;
-    console.log(target.value);
   }
   if (type === 'blur' && target.value.length < 5) target.value = '';
 };
@@ -33,10 +32,11 @@ if (inputPhone.type === 'tel') {
   inputPhone.addEventListener('keydown', maskPhone);
 }
 
-const resBtn = document.querySelector('.reservation__button')
+const resBtn = document.querySelector('.reservation__button');
 inputPhone.addEventListener('input', () => {
   const regexPhone = /^(\+\d)\s(\(\d{3}\))\s(\d{3}-)(\d{2}-)(\d{2})$/;
-  if (regexPhone.test(inputPhone.value)) {
+  const regPhone = /^(\+\d)\s$/;
+  if (regexPhone.test(inputPhone.value) || regPhone.test(inputPhone.value)) {
     resBtn.disabled = false;
   } else {
     resBtn.setAttribute('disabled', 'true');
@@ -49,7 +49,7 @@ inputName.addEventListener('input', () => {
   inputName.value = inputName.value.replace(/[^А-Я\s]/i, '');
 
   const regexFullName = /^([А-яЁё]+\s)([А-яЁё]+\s)([А-яЁё]+)+/i;
-  if (regexFullName.test(inputName.value)) {
+  if (regexFullName.test(inputName.value) || inputName.value === '') {
     resBtn.disabled = false;
   } else {
     resBtn.setAttribute('disabled', 'true');
