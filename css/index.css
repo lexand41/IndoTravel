@@ -1691,12 +1691,24 @@ p {
 		height: 99px;
 }
 
+.input-wrap_hover:hover {
+  border-color: #FCB500;
+}
+
 .reservation__input-wrap:focus {
 		border-color: #C2900F;
 }
 
 .reservation__input-wrap:active {
 		border-color: #FCB500;
+}
+
+.input-wrap__invalid {
+  border-color: orangered;
+}
+
+.input-wrap__valid {
+  border-color: #36cc36;
 }
 
 .reservation__label {
@@ -1706,6 +1718,12 @@ p {
 		color: #303030;
 		margin-bottom: 12px;
 }
+
+/* .reservation__label:focus {
+  border-color: #FFFFFF;
+  outline: 2px solid #09E079;
+  box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2); 
+} */
 
 .reservation__input {
 		border: none;
@@ -2773,9 +2791,9 @@ p {
 				background: url("../img/album/arrow-right-black.svg") center/contain no-repeat;
 		}
 
-		.reservation__input-wrap:hover {
+		/* .reservation__input-wrap:hover {
 				border-color: #FCB500;
-		}
+		} */
 
 		.footer__socials-link:hover {
 				-webkit-transform: rotate(-30deg);

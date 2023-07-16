@@ -55,6 +55,7 @@ export const timer = (deadline) => {
         incline(timer.minutes, timerUnitsHours, 'минута', 'минуты', 'минут');
         timerCountMinutes.textContent =
           timer.seconds < 10 ? '0' + timer.seconds : timer.seconds;
+        // eslint-disable-next-line max-len
         incline(timer.seconds, timerUnitsMinutes, 'секунда', 'секунды', 'секунд');
       } else {
         timerCountDays.textContent = timer.days;

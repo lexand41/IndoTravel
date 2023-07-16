@@ -3,6 +3,7 @@ import './modules/acc.js';
 import './modules/airplane.js';
 import './modules/data.js';
 import './modules/sendData.js';
+import './modules/masks.js';
 
 import {timer} from './modules/timer.js';
 import {pluginTimer} from './modules/createElemTimer.js';

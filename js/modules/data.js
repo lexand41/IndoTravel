@@ -36,7 +36,7 @@ const monthToString = (date) => {
 const renderBooking = async () => {
   const data = await loadBooking();
   const listBookDate = document.createElement('select');
-  listBookDate.classList.add('reservation__select');
+  listBookDate.classList.add('reservation__select', 'input-wrap_hover');
   listBookDate.setAttribute('id', 'reservation__date');
   listBookDate.setAttribute('name', 'dates');
 
@@ -46,7 +46,7 @@ const renderBooking = async () => {
   listBookDate.append(titleData);
 
   const bookPersons = document.createElement('select');
-  bookPersons.classList.add('reservation__select');
+  bookPersons.classList.add('reservation__select', 'input-wrap_hover');
   bookPersons.setAttribute('id', 'reservation__people');
   bookPersons.setAttribute('name', 'people');
 
