@@ -119,15 +119,15 @@ const createRequestFooter = () => {
   });
 };
 
-resForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+// resForm.addEventListener('submit', (e) => {
+//   e.preventDefault();
 
-  const countPersons = sessionStorage.getItem('countPersons');
-  const dates = sessionStorage.getItem('dates');
-  const fullPrice = sessionStorage.getItem('fullPrice');
+//   const countPersons = sessionStorage.getItem('countPersons');
+//   const dates = sessionStorage.getItem('dates');
+//   const fullPrice = sessionStorage.getItem('fullPrice');
 
-  showModal(countPersons, dates, fullPrice);
-});
+//   showModal(countPersons, dates, fullPrice);
+// });
 
 footerForm.addEventListener('submit', (e) => {
   e.preventDefault();
